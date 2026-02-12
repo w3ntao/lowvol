@@ -1,0 +1,9 @@
+body {
+    font-family: monospace;
+    background: #111;
+    color: #eee;
+    padding: 2em;
+}
+pre {
+    white-space: pre-wrap;
+}

@@ -1,36 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/ansi_up@5.1.0/ansi_up.min.js"></script>
-  <meta charset="UTF-8" />
-  <title>每日更新内容</title>
-  <style>
-    body {
-      font-family: monospace;
-      background: #111;
-      color: #eee;
-      padding: 2em;
-    }
-    pre {
-      white-space: pre-wrap;
-    }
-  </style>
+    <script src="https://cdn.jsdelivr.net/npm/ansi_up@5.1.0/ansi_up.min.js"></script>
+    <meta charset="UTF-8" />
+    <title>Low Vol</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <pre id="content">加载中...</pre>
+    <pre id="content">加载中...</pre>
 
-<script>
-  fetch("out.txt")
-    .then(r => r.text())
-    .then(text => {
-      const ansi_up = new AnsiUp();
-      const html = ansi_up.ansi_to_html(text);
+    <script>
+    fetch("out.txt")
+        .then(r => r.text())
+        .then(text => {
+        const ansi_up = new AnsiUp();
+        const html = ansi_up.ansi_to_html(text);
 
-      document.getElementById("content").innerHTML = html;
-    })
-    .catch(() => {
-      document.getElementById("content").textContent = "error loading out.txt";
-    });
-</script>
+        document.getElementById("content").innerHTML = html;
+        })
+        .catch(() => {
+        document.getElementById("content").textContent = "error loading out.txt";
+        });
+    </script>
 </body>
 </html>
