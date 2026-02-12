@@ -6,15 +6,11 @@
     font-display: swap;
 }
 
-body, pre, code, * {
-    font-family: "IosevkaTermSlab" !important;
-}
-
-body {
-    font-family: "IosevkaTermSlab", sans-serif !important;
+body, pre, code {
+    font-family: "IosevkaTermSlab", sans-serif;
     background: #2A2A2A;
     color: #eee;
-    padding: 2em;
+    padding: 1em;
 }
 
 pre {
