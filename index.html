@@ -9,18 +9,65 @@
 <body>
     <pre id="content">loading...</pre>
 
-    <script>
+<script>
+    function preprocessStrike(text) {
+        const STRIKE_ON  = "__SGR_STRIKE_ON__";
+        const STRIKE_OFF = "__SGR_STRIKE_OFF__";
+
+        return text.replace(/\x1b\[([0-9;]*)m/g, (match, params) => {
+
+            if (!params) return match;
+
+            const codes = params.split(";").map(Number);
+
+            let hasStrikeOn = codes.includes(9);
+            let hasStrikeOff = codes.includes(29);
+            let hasReset = codes.includes(0);
+
+            // 移除 9 和 29
+            const remaining = codes.filter(c => c !== 9 && c !== 29);
+
+            let rebuilt = "";
+
+            if (remaining.length > 0) {
+                rebuilt += `\x1b[${remaining.join(";")}m`;
+            }
+
+            if (hasReset || hasStrikeOff) {
+                rebuilt += STRIKE_OFF;
+            }
+
+            if (hasStrikeOn) {
+                rebuilt += STRIKE_ON;
+            }
+
+            return rebuilt;
+        });
+    }
+
+    function renderAnsi(text) {
+        const STRIKE_ON  = "__SGR_STRIKE_ON__";
+        const STRIKE_OFF = "__SGR_STRIKE_OFF__";
+
+        const ansi_up = new AnsiUp();
+        let html = ansi_up.ansi_to_html(text);
+
+        html = html
+            .replaceAll(STRIKE_ON, "<span class='sgr-strike'>")
+            .replaceAll(STRIKE_OFF, "</span>");
+
+        return html;
+    }
+
     fetch("out.txt")
         .then(r => r.text())
         .then(text => {
-        const ansi_up = new AnsiUp();
-        const html = ansi_up.ansi_to_html(text);
+            const processed = preprocessStrike(text);
+            const finalHtml = renderAnsi(processed);
 
-        document.getElementById("content").innerHTML = html;
-        })
-        .catch(() => {
-        document.getElementById("content").textContent = "error loading out.txt";
-        });
-    </script>
+            document.getElementById("content").innerHTML = finalHtml;
+    });
+</script>
+
 </body>
 </html>

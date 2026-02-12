@@ -16,3 +16,8 @@ body, pre, code {
 pre {
     white-space: pre-wrap;
 }
+
+/* 删除线 */
+.sgr-strike {
+    text-decoration: line-through;
+}
