@@ -1,0 +1,38 @@
+name: Daily Update
+
+on:
+  schedule:
+    - cron: "10 0 * * 5"
+    # runs on 10:00 of everyday
+    # 10:00 UTC = 18:00 Beijing
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install dependencies
+        run: |
+          sudo apt install -y python3 python-is-python3
+          pip install --upgrade akshare termcolor pyxirr matplotlib
+
+      - name: Run program and capture output
+        run: |
+          git clone git@github.com:w3ntao/quant-tracer.git
+          cd quant-tracer
+          python quant_tracer.py --blue
+          python quant_tracer.py --blue > out-$(date +'%Y-%m-%d').txt
+          mv out-$(date +'%Y-%m-%d').txt ../
+          cd ..
+          rm -rf quant-tracer
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-bot"
+          git config user.email "github-actions@github.com"
+          git add *.txt
+          git commit -m "Daily update" || echo "No changes"
+          git push
