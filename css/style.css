@@ -1,9 +1,22 @@
+@font-face {
+    font-family: 'IosevkaTermSlab';
+    src: url('../fonts/IosevkaTermSlabNerdFontMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body, pre, code, * {
+    font-family: "IosevkaTermSlab" !important;
+}
+
 body {
-    font-family: monospace;
+    font-family: "IosevkaTermSlab", sans-serif !important;
     background: #111;
     color: #eee;
     padding: 2em;
 }
+
 pre {
     white-space: pre-wrap;
 }
