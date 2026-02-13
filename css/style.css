@@ -1,20 +1,25 @@
 @font-face {
-    font-family: 'IosevkaTermSlab';
-    src: url('../fonts/IosevkaTermSlabNerdFontMono-Regular-subset.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'MonoCJK';
+    src: url('../fonts/SarasaTermSlabSC-subset.woff2') format('woff2');
     font-display: swap;
 }
 
-body, pre, code {
-    font-family: "IosevkaTermSlab", sans-serif;
+body,
+pre,
+code {
+    font-family:
+        "MonoCJK",
+        monospace;
+
     background: #2A2A2A;
     color: #eee;
     padding: 1em;
+
+    text-rendering: geometricPrecision;
 }
 
 pre {
-    white-space: pre-wrap;
+    white-space: pre;
 }
 
 /* 删除线 */
