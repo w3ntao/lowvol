@@ -68,6 +68,7 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
+          git checkout -B github-bot
           git add blue_stocks_*.txt
-          git commit -m "[bot] daily update: $TODAY" || echo "No changes"
+          git commit -m "[github-bot] daily update: $TODAY" || echo "No changes"
           git push
