@@ -5,7 +5,7 @@ on:
   #  branches: ["main"]
 
   schedule:
-    - cron: "10 0 * * *"
+    - cron: "0 10 * * *"
     # runs on 10:00 of everyday
     # 10:00 UTC = 18:00 Beijing
   workflow_dispatch:
@@ -65,12 +65,12 @@ jobs:
         if: steps.check.outputs.should_run == 'true'
 
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@github.com"
 
           git add blue_stocks_*.txt
-          git commit -m "[github-bot] daily update: $TODAY" || echo "No changes"
+          git commit -m "[ci-bot] daily update: $TODAY" || echo "No changes"
           git push -u origin main
 
-          git checkout -B backup
-          git push -u origin backup
+          git checkout -B backup-$TODAY
+          git push -u origin backup-$TODAY
