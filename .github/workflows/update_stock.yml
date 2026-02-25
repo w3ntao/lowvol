@@ -1,4 +1,4 @@
-name: daily update
+name: update_stock
 
 on:
   #push: # don't trigger workflow from push

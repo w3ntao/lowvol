@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: deploy pages
+name: update_page
 
 on:
   # Runs on pushes targeting the default branch
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
   workflow_run:
-    workflows: ["daily update"]
+    workflows: ["update_stock"]
     types:
       - completed
 
