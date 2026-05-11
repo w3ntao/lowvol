@@ -82,8 +82,8 @@ jobs:
         if: steps.check.outputs.should_run == 'true'
 
         run: |
-          git config user.name "ci-bot"
-          git config user.email "ci-bot@github.com"
+          git config user.name "Wentao Liu"
+          git config user.email "wentao.liu.zero@outlook.com"
 
           git add history/*.txt stock_date.txt
 
